@@ -1,18 +1,25 @@
-require('dotenv').config();
-
-const express = require('express');
-const connectDB = require('./db/db');
-const contactsRouter = require('./routes/contacts');
+// Підключення бібліотек через require
+const express = require("express");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
+
+// Middleware
 app.use(express.json());
 
- 
-app.use('/api/contacts', contactsRouter);
- 
-connectDB();
+// Підключення до MongoDB
+mongoose.connect(process.env.DB_URI)
+  .then(() => console.log("Database connection successful"))
+  .catch(err => console.error("Database connection error:", err));
+
+// Простий маршрут
+app.get("/", (req, res) => {
+  res.send("Hello from CommonJS server!");
+});
 
 // Запуск сервера
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running on port ${process.env.PORT || 3000}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

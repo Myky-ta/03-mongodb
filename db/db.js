@@ -1,15 +1,14 @@
-import mongoose from "mongoose";
-
-const DB_HOST = process.env.DB_HOST;
+const mongoose = require("mongoose");
+require("dotenv").config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(DB_HOST);
+    await mongoose.connect(process.env.DB_URI);
     console.log("Database connection successful");
-  } catch (error) {
-    console.error(error.message);
-    process.exit(1);
+  } catch (err) {
+    console.error("Database connection error:", err);
+    process.exit(1); // зупиняє процес при помилці
   }
 };
 
-export default connectDB;
+module.exports = connectDB;
