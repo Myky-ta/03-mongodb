@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Contact = require("../models/contact");
 const { addContactSchema, updateContactSchema, updateFavoriteSchema } = require("../schemas/contactSchemas");
-const validateBody = require("../middlewares/validateBody");
+const validateBody = require("../middleware/validateBody");
 
 // CREATE
 router.post("/", validateBody(addContactSchema), async (req, res) => {
