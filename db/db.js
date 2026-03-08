@@ -7,8 +7,10 @@ const connectDB = async () => {
     console.log("Database connection successful");
   } catch (err) {
     console.error("Database connection error:", err);
-    process.exit(1);  
+    process.exit(1);
   }
 };
 
 module.exports = connectDB;
+
+
